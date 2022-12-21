@@ -53,6 +53,23 @@ class UserRepository extends ServiceEntityRepository
         return $user;
     }
 
+    public function update(UserDto $userDto, User $user): User
+    {
+        $user->setName($userDto->name);
+        $user->setProfileImage($userDto->profile_image);
+        $user->setGoogleId($userDto->google_id);
+        $user->setEmail($userDto->email);
+
+        $this->save($user, true);
+
+        return $user;
+    }
+
+    public function delete(User $user)
+    {
+        $this->remove($user, true);
+    }
+
 
 
 //    /**
