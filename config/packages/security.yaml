@@ -22,7 +22,7 @@ security:
             custom_authenticators:
                 - App\Security\ApiKeyAuthenticator
     access_control:
-        - { path: ^/login, roles: PUBLIC_ACCESS }
+        - { path: ^/user/create, roles: PUBLIC_ACCESS }
         - { path: ^/, roles: IS_AUTHENTICATED_FULLY }
 
 when@test:

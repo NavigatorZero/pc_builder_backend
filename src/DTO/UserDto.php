@@ -36,5 +36,13 @@
       */
      public ?string $profile_image = null;
 
+     /**
+      * @Assert\Sequentially({
+      *     @Assert\NotBlank,
+      *     @Assert\Type("string")
+      * })
+      */
+     public string $password;
 
-}
+
+ }

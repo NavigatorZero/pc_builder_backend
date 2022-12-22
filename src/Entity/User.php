@@ -114,6 +114,13 @@ class User extends Entity implements UserInterface, PasswordAuthenticatedUserInt
         return $this->password;
     }
 
+    public function setPassword($password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
     /**
      * @return array
      */

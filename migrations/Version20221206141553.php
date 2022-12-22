@@ -36,6 +36,8 @@ final class Version20221206141553 extends AbstractMigration
 '
         );
 
+        $this->addSql('ALTER TABLE "user" ALTER COLUMN id SET DEFAULT nextval(\'user_id_seq\');');
+
         $this->addSql(
             '
         CREATE TABLE public.role
@@ -57,7 +59,7 @@ final class Version20221206141553 extends AbstractMigration
             constraint role_user___fk
                 FOREIGN KEY (role_id) REFERENCES public.role (id),
             constraint user_role___fk
-                FOREIGN KEY key (user_id) REFERENCES public."user" (id)
+                FOREIGN KEY (user_id) REFERENCES public."user" (id)
         );
         '
         );

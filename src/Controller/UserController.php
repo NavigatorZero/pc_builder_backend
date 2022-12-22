@@ -3,12 +3,14 @@
 namespace App\Controller;
 
 use App\DTO\UserDto;
+use App\Entity\User;
 use App\Manager\UserManager;
 use Artyum\RequestDtoMapperBundle\Attribute\Dto;
 use Artyum\RequestDtoMapperBundle\Extractor\JsonExtractor;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class UserController extends AbstractController
@@ -29,8 +31,12 @@ class UserController extends AbstractController
 
     #[Route('/user/create', name: 'post_user', methods: 'POST')]
     public function postUser(
-        #[Dto(extractor: JsonExtractor::class, validate: true)] UserDto $userDto
+        #[Dto(extractor: JsonExtractor::class, validate: true)] UserDto $userDto,
+        UserPasswordHasherInterface $passwordHasher
     ): Response {
+
+        $userDto->password = $passwordHasher->hashPassword(new User(), $userDto->password);
+
         return $this->json($this->userManager->create($userDto));
     }
 

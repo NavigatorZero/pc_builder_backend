@@ -48,6 +48,8 @@ class UserRepository extends ServiceEntityRepository
         $user->setName($dto->name);
         $user->setGoogleId($dto->google_id);
         $user->setProfileImage($dto->profile_image);
+        $user->setPassword($dto->password);
+
         $this->save($user, true);
 
         return $user;
